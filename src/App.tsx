@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// import Login from './components/Login';
+import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
 function App() {
@@ -38,8 +38,5 @@ function Home() {
 }
 
 
-function Login() {
-  return <h2>Home</h2>;
-}
 
 export default App;
