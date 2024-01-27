@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// App.tsx
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Dashboard from './Dashboard';
+import Home from './Home';
 
 function App() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('http://localhost:4500/api/v1/auth/me')
+      .then((res) => res.json())
+      .then((userData) => setUser(userData))
+      .catch((error) => console.error('Error fetching user:', error));
+  }, []);
+
+  const handleLogin = () => {
+    window.location.href = 'http://localhost:4500/api/v1/auth/google';
+  };
+
+  const handleLogout = () => {
+    fetch('http://localhost:4500/api/v1/auth/logout', { method: 'GET' })
+      .then(() => setUser(null))
+      .catch((error) => console.error('Error logging out:', error));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/dashboard">
+            <Dashboard user={user} onLogout={handleLogout} />
+          </Route>
+          <Route path="/">
+            <Home user={user} onLogin={handleLogin} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
