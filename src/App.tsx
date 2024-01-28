@@ -17,7 +17,7 @@ function Dashboard({ user, onLogout }: { user: User | null; onLogout: () => void
   const [searchTerm, setSearchTerm] = useState('');
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:4500/api/v1/search', { credentials: 'include' });
+      const response = await fetch('https://search-track.cyclic.app/api/v1/search', { credentials: 'include' });
 
       if (response.ok) {
         const data = await response.json();
@@ -75,7 +75,7 @@ function Dashboard({ user, onLogout }: { user: User | null; onLogout: () => void
       ) : (
         <div>
           <h2>Login</h2>
-          <a href="http://localhost:4500/api/v1/auth/google">Login with Google</a>
+          <a href="https://search-track.cyclic.app/api/v1/auth/google">Login with Google</a>
         </div>
       )}
     </div>
@@ -89,7 +89,7 @@ function AuthApp() {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch('http://localhost:4500/api/v1/auth/me', {
+        const response = await fetch('https://search-track.cyclic.app/api/v1/auth/me', {
           credentials: 'include',
         });
 
@@ -108,7 +108,7 @@ function AuthApp() {
   }, []);
 
   const handleLogout = () => {
-    fetch('http://localhost:4500/api/v1/auth/logout', { credentials: 'include' })
+    fetch('https://search-track.cyclic.app/api/v1/auth/logout', { credentials: 'include' })
       .then(() => {
         setUser(null);
         document.cookie = 'yourAuthCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
