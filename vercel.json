@@ -1,0 +1,29 @@
+{
+    "routes": [
+      {
+        "src": "/auth/google/callback",
+        "dest": "https://search-track.cyclic.app/api/v1/auth/google/callback"
+      },
+      {
+        "src": "/auth/google",
+        "dest": "https://search-track.cyclic.app/api/v1/auth/google"
+      },
+      {
+        "src": "/auth/me",
+        "dest": "https://search-track.cyclic.app/api/v1/auth/me"
+      },
+      {
+        "src": "/auth/logout",
+        "dest": "https://search-track.cyclic.app/api/v1/auth/logout"
+      },
+      {
+        "src": "/search",
+        "dest": "https://search-track.cyclic.app/api/v1/search"
+      },
+      {
+        "src": "/api/v1/(.*)",
+        "dest": "http://localhost:4500/api/v1/$1"
+      }
+    ]
+  }
+  
