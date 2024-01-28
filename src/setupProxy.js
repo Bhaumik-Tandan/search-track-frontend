@@ -9,7 +9,7 @@ module.exports = function (app) {
             '/auth/logout',
             "/search"
         ], {
-            target: 'http://localhost:4500/api/v1',
+            target: 'https://search-track.cyclic.app/api/v1',
             changeOrigin: true,
             onProxyRes: function (proxyRes, req, res) {
                 // Allow requests from any origin (not recommended for production)
