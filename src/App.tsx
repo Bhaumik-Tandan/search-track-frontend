@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 
 interface User {
   name: string;
@@ -16,7 +15,10 @@ function Dashboard({ user, onLogout }: { user: User | null; onLogout: () => void
           <button onClick={onLogout}>Logout</button>
         </div>
       ) : (
-        <Navigate to="/login" replace />
+        <div>
+          <h2>Login</h2>
+          <a href="http://localhost:4500/api/v1/auth/google">Login with Google</a>
+        </div>
       )}
     </div>
   );
@@ -65,25 +67,11 @@ function AuthApp() {
   };
 
   return (
-    <Router>
+    <div>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Dashboard user={user} onLogout={handleLogout} />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <Dashboard user={user} onLogout={handleLogout} />
       </div>
-    </Router>
+    </div>
   );
 }
 
