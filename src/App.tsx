@@ -17,11 +17,11 @@ function Dashboard({ user, onLogout }: { user: User | null; onLogout: () => void
   const [searchTerm, setSearchTerm] = useState('');
   const fetchData = async () => {
     try {
-      const response = await fetch('http://lovalhost:4500/api/v1/search');
+      const response = await fetch('http://localhost:4500/api/v1/search', { credentials: 'include' });
 
       if (response.ok) {
         const data = await response.json();
-        setSearchResults(data?.search || []); // Add a default value if data?.search is undefined
+        setSearchResults(data || []); // Add a default value if data?.search is undefined
       } else {
         console.error('Error fetching data:', response.statusText);
       }
