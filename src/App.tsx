@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import apiHelper from './helper/apiHelper';
 import Login from './components/Login';
 import CONSTANTS from "./constants";
+import Search from './components/Search';
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<{ _id: string }>();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -30,9 +31,9 @@ function App() {
   }, []);
 
   return user ? (
-    <div>App</div>
+    <Search user={user} setUser={setUser} />
   ) : (
-    <Login />
+   <Login/>
   );
 }
 
