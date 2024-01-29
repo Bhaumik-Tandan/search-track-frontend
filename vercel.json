@@ -1,0 +1,25 @@
+{
+    "rewrites": [
+      {
+        "source": "/auth/google/callback",
+        "destination": "https://3b5f-2405-201-13-305f-fd4e-21a6-6c6a-e6b.ngrok-free.app/api/v1/auth/google/callback"
+      },
+      {
+        "source": "/auth/google",
+        "destination": "https://3b5f-2405-201-13-305f-fd4e-21a6-6c6a-e6b.ngrok-free.app/api/v1/auth/google"
+      },
+      {
+        "source": "/auth/me",
+        "destination": "https://3b5f-2405-201-13-305f-fd4e-21a6-6c6a-e6b.ngrok-free.app/api/v1/auth/me"
+      },
+      {
+        "source": "/auth/logout",
+        "destination": "https://3b5f-2405-201-13-305f-fd4e-21a6-6c6a-e6b.ngrok-free.app/api/v1/auth/logout"
+      },
+      {
+        "source": "/search",
+        "destination": "https://3b5f-2405-201-13-305f-fd4e-21a6-6c6a-e6b.ngrok-free.app/api/v1/search"
+      }
+    ]
+  }
+  
