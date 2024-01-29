@@ -5,10 +5,12 @@ import DashboardProps from '../types/DashboardProps';
 function Dashboard({ user, setUser }: DashboardProps) {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/search', { credentials: 'include' });
+      const url = `/search?page=${currentPage}&limit=10${searchTerm ? `&query=${encodeURIComponent(searchTerm)}` : ''}`;
+      const response = await fetch(url, { credentials: 'include' });
 
       if (response.ok) {
         const data = await response.json();
@@ -23,22 +25,13 @@ function Dashboard({ user, setUser }: DashboardProps) {
 
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, [user, currentPage, searchTerm]);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
     setSearchTerm(term);
 
-    if (term === '') {
-      fetchData();
-    } else {
-      const filteredResults = searchResults.filter(
-        (result) =>
-          result.url.toLowerCase().includes(term.toLowerCase()) ||
-          result.userId.toLowerCase().includes(term.toLowerCase())
-      );
-      setSearchResults(filteredResults);
-    }
+    setCurrentPage(1); // Reset to the first page when searching
   };
 
   const onLogout = () => {
@@ -76,6 +69,16 @@ function Dashboard({ user, setUser }: DashboardProps) {
           <a href="/auth/google">Login with Google</a>
         </div>
       )}
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Previous Page
+        </button>
+        <span>Page {currentPage}</span>
+        <button onClick={() => setCurrentPage((prev) => prev + 1)}>Next Page</button>
+      </div>
     </div>
   );
 }
